@@ -1,18 +1,32 @@
 import { LitElement, html, css } from 'lit';
 
 class PolarisCta extends LitElement {
+
+  static get tag() {
+    return "polaris-cta";
+  }
+
+  constructor() {
+    super();
+    this.text = '';
+    this.link = '';
+    this.type = 'tinted';
+    this.outlined = false;
+    this.filled = false;
+  }
+
   static properties = {
-    type: { type: String, reflect: true },
-    outlined: { type: Boolean },
-    filled: { type: Boolean },
     text: { type: String },
-    link: { type: String }
+    link: { type: String },
+    type: { type: String, reflect: true },
+    outlined: { type: Boolean, reflect: true },
+    filled: { type: Boolean, reflect: true },
   };
 
   static styles = css`
     :host {
       display: block;
-      margin: 12px;
+      margin-left: 32px;
       --polaris-cta-psu-white: #ffffff;
       --polaris-cta-psu-blue: #1E407C;
       --polaris-cta-psu-darkblue: #001E44;
@@ -20,103 +34,98 @@ class PolarisCta extends LitElement {
       --polaris-cta-psu-gray:#E4E5E7;
       --polaris-cta-psu-black: #000000;
       --polaris-cta-psu-darkgray: #4f627C;
+      --polaris-cta-border-width: 2px;
+      --polaris-cta-border-radius: 4px;
+      --polaris-cta-transition: .3s all ease-in-out;
+      --polaris-cta-border-style: solid;
+      --polaris-cta-border-color: var(--polaris-cta-psu-blue);
+      --polaris-cta-background-color: var(--polaris-cta-psu-white);
+      --polaris-cta-color: var(--polaris-cta-psu-blue);
     }
 
     a {
+      display: block;
       text-transform: uppercase;
       text-decoration: none;
       font-style: italic;
       font-weight: 700;
-      letter-spacing: .025rem;
-      margin-left: 32px;
-      border-radius: 4px;
-      display: inline-flex;
+      letter-spacing: .4px;
+      padding: 12px 32px;
+      border-radius: var(--polaris-cta-border-radius);
+      transition: var(--polaris-cta-transition);
+      color: var(--polaris-cta-color);
+      border-width: var(--polaris-cta-border-width);
+      border-style: var(--polaris-cta-border-style);
+      border-color: var(--polaris-cta-border-color);
+      background-color: var(--polaris-cta-background-color);
+    }
+
+    a:focus {
+      outline: none;
     }
 
     :host([type="primary"][outlined]) a {
-      border: 2px solid var(--polaris-cta-psu-blue);
-      background-color: var(--polaris-cta-psu-white);
-      color: var(--polaris-cta-psu-blue);
-      padding: 12px 32px;
-      transition: 0.1s;
+      --polaris-cta-border-color: var(--polaris-cta-psu-blue);
+      --polaris-cta-background-color: var(--polaris-cta-psu-white);
+      --polaris-cta-color: var(--polaris-cta-psu-blue);
     }
 
     :host([type="primary"][outlined]) a:focus,
     :host([type="primary"][outlined]) a:hover {
-      border: 2px solid var(--polaris-cta-psu-blue);
-      background-color: var(--polaris-cta-psu-blue);
-      color: var(--polaris-cta-psu-white);
-      padding: 12px 32px;
+      --polaris-cta-border-color: var(--polaris-cta-psu-blue);
+      --polaris-cta-background-color: var(--polaris-cta-psu-blue);
+      --polaris-cta-color: var(--polaris-cta-psu-white);
     }
 
     :host([type="primary"][filled]) a {
-      border: 2px solid var(--polaris-cta-psu-blue);
-      background-color: var(--polaris-cta-psu-blue);
-      color: var(--polaris-cta-psu-white);
-      padding: 12px 32px;
-      transition: 0.1s;
+      --polaris-cta-border-color: var(--polaris-cta-psu-blue);
+      --polaris-cta-background-color: var(--polaris-cta-psu-blue);
+      --polaris-cta-color: var(--polaris-cta-psu-white);
     }
 
     :host([type="primary"][filled]) a:focus,
     :host([type="primary"][filled]) a:hover {
-      border: 2px solid var(--polaris-cta-psu-blue);
-      background-color: var(--polaris-cta-psu-white);
-      color: var(--polaris-cta-psu-blue);
-      padding: 12px 32px;
+      --polaris-cta-border-color: var(--polaris-cta-psu-blue);
+      --polaris-cta-background-color: var(--polaris-cta-psu-white);
+      --polaris-cta-color: var(--polaris-cta-psu-blue);
     }
 
     :host([type="tinted"]) a {
-      border: 2px solid var(--polaris-cta-psu-white);
-      background-color: var(--polaris-cta-psu-darkgray);
-      color: var(--polaris-cta-psu-lightblue);
-      padding: 12px 32px;
+      --polaris-cta-border-color: var(--polaris-cta-psu-white);
+      --polaris-cta-background-color: var(--polaris-cta-psu-darkgray);
+      --polaris-cta-color: var(--polaris-cta-psu-lightblue);
     }
 
     :host([type="light"][outlined]) a {
-      border: 2px solid var(--polaris-cta-psu-white);
-      background-color: var(--polaris-cta-psu-darkblue);
-      color: var(--polaris-cta-psu-lightblue);
-      padding: 12px 32px;
-      transition: 0.1s;
+      --polaris-cta-border-color: var(--polaris-cta-psu-white);
+      --polaris-cta-background-color: var(--polaris-cta-psu-darkblue);
+      --polaris-cta-color: var(--polaris-cta-psu-lightblue);
     }
 
     :host([type="light"][outlined]) a:focus,
     :host([type="light"][outlined]) a:hover {
-      border: 2px solid var(--polaris-cta-psu-lightblue);
-      background-color: var(--polaris-cta-psu-lightblue);
-      color: var(--polaris-cta-psu-darkblue);
-      padding: 12px 32px;
+      --polaris-cta-border-color: var(--polaris-cta-psu-lightblue);
+      --polaris-cta-background-color: var(--polaris-cta-psu-lightblue);
+      --polaris-cta-color: var(--polaris-cta-psu-darkblue);
     }
 
     :host([type="light"][filled]) a {
-      border: 2px solid var(--polaris-cta-psu-lightblue);
-      background-color: var(--polaris-cta-psu-lightblue);
-      color: var(--polaris-cta-psu-darkblue);
-      padding: 12px 32px;
-      transition: 0.1s;
+      --polaris-cta-border-color: var(--polaris-cta-psu-lightblue);
+      --polaris-cta-background-color: var(--polaris-cta-psu-lightblue);
+      --polaris-cta-color: var(--polaris-cta-psu-darkblue);
     }
 
     :host([type="light"][filled]) a:focus,
     :host([type="light"][filled]) a:hover {
-      border: 2px solid var(--polaris-cta-psu-white);
-      background-color: var(--polaris-cta-psu-darkblue);
-      color: var(--polaris-cta-psu-lightblue);
-      padding: 12px 32px;
+      --polaris-cta-border-color: var(--polaris-cta-psu-white);
+      --polaris-cta-background-color: var(--polaris-cta-psu-darkblue);
+      --polaris-cta-color: var(--polaris-cta-psu-lightblue);
     }
   `;
 
-constructor() {
-  super();
-  this.text = 'Subscribe';
-  this.link = 'https://psu.edu';
-  this.type = 'tinted';
+  render() {
+    return html`<a href="${this.link}"><slot>${this.text}</slot></a>`;
+  }
 }
 
-render() {
-  return html`
-    <a href="${this.link}">${this.text}</a>
-  `;
-}
-}
-
-customElements.define('polaris-cta', PolarisCta);
+customElements.define(PolarisCta.tag, PolarisCta);

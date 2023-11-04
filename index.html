@@ -15,9 +15,12 @@
       font-family: sans-serif;
       background-color: #ededed;
       --polaris-cta-psu-white: #ffffff;
-      --polaris-cta-psu-gray:#E4E5E7;
+      --polaris-cta-psu-blue: #1E407C;
       --polaris-cta-psu-darkblue: #001E44;
+      --polaris-cta-psu-lightblue:#96BEE6;
+      --polaris-cta-psu-gray:#E4E5E7;
       --polaris-cta-psu-black: #000000;
+      --polaris-cta-psu-darkgray: #4f627C;
     }
 
     div {
@@ -53,12 +56,31 @@
     .black-text  {
       color: var(--polaris-cta-psu-black);
     }
+    polaris-cta:not(:defined) {
+      text-transform: uppercase;
+      text-decoration: none;
+      font-style: italic;
+      margin-left: 32px;
+      font-weight: 700;
+      letter-spacing: .025rem;
+      border-radius: 4px;
+      display: block;
+      padding: 12px 32px;
+      transition: 0.1s;
+      border: 2px solid var(--polaris-cta-psu-blue);
+      background-color: var(--polaris-cta-psu-white);
+      color: var(--polaris-cta-psu-blue);
+    }
   </style>
   
   <title>polaris-cta</title>
 </head>
 
 <body>
+  <div class="white-bg">
+    <p class="black-text">Get the news by email</p>
+    <polaris-cta>Subscribe</polaris-cta>
+  </div>
   <div class="white-bg">
     <p class="black-text">Get the news by email</p>
     <polaris-cta type="primary" outlined>Subscribe</polaris-cta>
